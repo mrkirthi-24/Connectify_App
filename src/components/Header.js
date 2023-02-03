@@ -21,6 +21,7 @@ const Header = () => {
         <Nav>
           <NavListWrap>
             <NavList className="active">
+              {/* eslint-disable-next-line */}
               <a href="#">
                 <img src="/images/nav-home.svg" alt="" />
                 <span>Home</span>
@@ -28,6 +29,7 @@ const Header = () => {
             </NavList>
 
             <NavList>
+              {/* eslint-disable-next-line */}
               <a href="#">
                 <img src="/images/nav-network.svg" alt="" />
                 <span>My Network</span>
@@ -35,6 +37,7 @@ const Header = () => {
             </NavList>
 
             <NavList>
+              {/* eslint-disable-next-line */}
               <a href="#">
                 <img src="/images/nav-jobs.svg" alt="" />
                 <span>Jobs</span>
@@ -42,6 +45,7 @@ const Header = () => {
             </NavList>
 
             <NavList>
+              {/* eslint-disable-next-line */}
               <a href="#">
                 <img src="/images/nav-messaging.svg" alt="" />
                 <span>Messaging</span>
@@ -49,6 +53,7 @@ const Header = () => {
             </NavList>
 
             <NavList>
+              {/* eslint-disable-next-line */}
               <a href="#">
                 <img src="/images/nav-notifications.svg" alt="" />
                 <span>Notifications</span>
@@ -56,6 +61,7 @@ const Header = () => {
             </NavList>
 
             <User>
+              {/* eslint-disable-next-line */}
               <a href="#">
                 <img src="/images/user.svg" alt="" />
                 <span>Me</span>
@@ -63,11 +69,13 @@ const Header = () => {
               </a>
 
               <SignOut>
+                {/* eslint-disable-next-line */}
                 <a href="#">Sign Out</a>
               </SignOut>
             </User>
 
             <Work>
+              {/* eslint-disable-next-line */}
               <a href="#">
                 <img src="/images/nav-work.svg" alt="" />
                 <span>
