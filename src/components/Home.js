@@ -1,41 +1,43 @@
-import React from 'react'
-import styled from 'styled-components'
-import LeftSide from './LeftSide'
-import Main from './Main'
-import RightSide from './RightSide'
+import React from "react";
+import styled from "styled-components";
+import LeftSide from "./LeftSide";
+import Main from "./Main";
+import RightSide from "./RightSide";
 
 const Home = (props) => {
   return (
     <Container>
-      <Section>
-        <h5>
-          {/* eslint-disable-next-line */}
-          <a>Hiring in a hurry? - &nbsp;</a>
-        </h5>
-        <p>
-          Find talented pros in record time with Upwork and keep business
-          moving.
-        </p>
-      </Section>
-      <Layout>
-        <LeftSide />
-        <Main />
-        <RightSide />
-      </Layout>
+      <Content>
+        <Section>
+          <h5>
+            {/* eslint-disable-next-line */}
+            <a>Hiring in a hurry? - &nbsp;</a>
+          </h5>
+          <p>
+            Find talented pros in record time with Upwork and keep business
+            moving.
+          </p>
+        </Section>
+        <Layout>
+          <LeftSide />
+          <Main />
+          <RightSide />
+        </Layout>
+      </Content>
     </Container>
-  )
-}
+  );
+};
 
 const Container = styled.div`
   padding-top: 52px;
   max-width: 100%;
-`
+`;
 //eslint-disable-next-line
 const Content = styled.div`
   max-width: 1128px;
   margin-left: auto;
   margin-right: auto;
-`
+`;
 const Section = styled.section`
   min-height: 50px;
   padding: 16px 0;
@@ -60,10 +62,10 @@ const Section = styled.section`
     flex-direction: column;
     padding: 0 5px;
   }
-`
+`;
 const Layout = styled.div`
   display: grid;
-  grid-template-areas: 'LeftSide Main RightSide';
+  grid-template-areas: "LeftSide Main RightSide";
   grid-template-columns: minmax(0, 5fr) minmax(0, 12fr) minmax(300px, 7fr);
   column-gap: 25px;
   row-gap: 25px;
@@ -73,6 +75,6 @@ const Layout = styled.div`
     flex-direction: column;
     padding: 0 5px;
   }
-`
+`;
 
-export default Home
+export default Home;
