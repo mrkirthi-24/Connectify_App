@@ -1,7 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
-const Header = () => {
+const Header = (props) => {
   return (
     <Container>
       <Content>
@@ -63,9 +63,15 @@ const Header = () => {
             <User>
               {/* eslint-disable-next-line */}
               <a href="#">
-                <img src="/images/user.svg" alt="" />
-                <span>Me</span>
-                <img src="/images/down-icon.svg" alt="" />
+                {props.user && props.user.photoURL ? (
+                  <img src={props.user.photoURL} />
+                ) : (
+                  <img src="/images/user.svg" alt="" />
+                )}
+
+                <span>
+                  Me <img src="/images/down-icon.svg" alt="" />
+                </span>
               </a>
 
               <SignOut>
@@ -88,8 +94,8 @@ const Header = () => {
         </Nav>
       </Content>
     </Container>
-  )
-}
+  );
+};
 
 const Container = styled.div`
   background-color: white;
@@ -100,7 +106,7 @@ const Container = styled.div`
   position: fixed;
   width: 100vw;
   z-index: 100;
-`
+`;
 
 const Content = styled.div`
   display: flex;
@@ -108,11 +114,11 @@ const Content = styled.div`
   margin: 0 auto;
   min-height: 100%;
   max-width: 1128px;
-`
+`;
 const Logo = styled.span`
   margin-right: 8px;
   font-size: 0px;
-`
+`;
 const Search = styled.div`
   opacity: 1;
   flex-grow: 1;
@@ -135,7 +141,7 @@ const Search = styled.div`
       vertical-align: text-top;
     }
   }
-`
+`;
 const SearchIcon = styled.div`
   width: 40px;
   position: absolute;
@@ -148,7 +154,7 @@ const SearchIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 const Nav = styled.nav`
   margin-left: auto;
   display: block;
@@ -159,14 +165,14 @@ const Nav = styled.nav`
     background: #fff;
     width: 100%;
   }
-`
+`;
 const NavListWrap = styled.ul`
   display: flex;
   flex-wrap: nowrap;
   list-style-type: none;
   .active {
     span:after {
-      content: '';
+      content: "";
       transform: scaleX(1);
       border-bottom: 3px solid var(--white, #fff);
       bottom: 0;
@@ -177,7 +183,7 @@ const NavListWrap = styled.ul`
       border-color: rgba(0, 0, 0, 0.9);
     }
   }
-`
+`;
 const NavList = styled.li`
   display: flex;
   align-items: center;
@@ -212,7 +218,7 @@ const NavList = styled.li`
       }
     }
   }
-`
+`;
 const SignOut = styled.div`
   position: absolute;
   top: 45px;
@@ -224,7 +230,7 @@ const SignOut = styled.div`
   transition-duration: 167ms;
   text-align: center;
   display: none;
-`
+`;
 const User = styled(NavList)`
   a > svg {
     width: 24px;
@@ -246,9 +252,9 @@ const User = styled(NavList)`
       justify-content: center;
     }
   }
-`
+`;
 const Work = styled(User)`
   border-left: 1px solid rgba(0, 0, 0, 0.08);
-`
+`;
 
-export default Header
+export default Header;
