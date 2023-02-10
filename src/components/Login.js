@@ -1,9 +1,13 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
+import { connect } from "react-redux";
+import { signInAPI } from "../actions";
+import { Redirect } from "react-router";
 
 const Login = (props) => {
   return (
     <Container>
+      {props.user && <Redirect to={"/home"} />}
       <Nav>
         <a href="/">
           <img src="/images/login-logo.svg" alt="Linkedin Logo" />
@@ -19,19 +23,19 @@ const Login = (props) => {
           <img src="/images/login-hero.svg" alt="HeroImg" />
         </Hero>
         <Form>
-          <Google>
+          <Google onClick={() => props.signIn()}>
             <img src="/images/google.svg" alt="googleLogo" />
             &nbsp; Sign in with Google
           </Google>
         </Form>
       </Section>
     </Container>
-  )
-}
+  );
+};
 
 const Container = styled.div`
   padding: 0px;
-`
+`;
 const Nav = styled.nav`
   max-width: 1128px;
   margin: auto;
@@ -49,7 +53,7 @@ const Nav = styled.nav`
       padding: 0 5px;
     }
   }
-`
+`;
 const Join = styled.a`
   font-size: 16px;
   padding: 10px 12px;
@@ -62,7 +66,7 @@ const Join = styled.a`
     color: rgba(0, 0, 0, 0.9);
     background-color: rgba(0, 0, 0, 0.08);
   }
-`
+`;
 const SignIn = styled.a`
   font-size: 16px;
   font-weight: 600;
@@ -78,7 +82,7 @@ const SignIn = styled.a`
   &:hover {
     background-color: rgba(112, 181, 249, 0.15);
   }
-`
+`;
 const Section = styled.section`
   display: flex;
   align-content: start;
@@ -96,7 +100,7 @@ const Section = styled.section`
     min-height: 0px;
     margin: auto;
   }
-`
+`;
 const Hero = styled.div`
   width: 100%;
   h1 {
@@ -128,7 +132,7 @@ const Hero = styled.div`
       height: initial;
     }
   }
-`
+`;
 const Form = styled.div`
   margin-top: 100px;
   width: 408px;
@@ -136,7 +140,7 @@ const Form = styled.div`
     margin-top: 20px;
     width: 100%;
   }
-`
+`;
 
 const Google = styled.button`
   display: flex;
@@ -157,5 +161,16 @@ const Google = styled.button`
     background-color: rgba(207, 207, 207, 0.25);
     color: rgba(0, 0, 0, 0.75);
   }
-`
-export default Login
+`;
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  signIn: () => dispatch(signInAPI()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
