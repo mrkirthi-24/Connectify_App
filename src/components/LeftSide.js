@@ -1,5 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import { connect } from "react-redux";
+import styled from "styled-components";
 
 const LeftSide = (props) => {
   return (
@@ -9,7 +10,10 @@ const LeftSide = (props) => {
           <CardBackground />
           <a>
             <Photo />
-            <Link>Welcome, There!</Link>
+            <Link>
+              Welcome,
+              <br /> {props.user ? props.user.displayName : "there!"}
+            </Link>
           </a>
           <a>
             <AddPhotoText>Add a photo</AddPhotoText>
@@ -49,12 +53,12 @@ const LeftSide = (props) => {
         </a>
       </CommunityCard>
     </Container>
-  )
-}
+  );
+};
 
 const Container = styled.div`
   grid-area: LeftSide;
-`
+`;
 const ArtCard = styled.div`
   text-align: center;
   overflow: hidden;
@@ -65,21 +69,21 @@ const ArtCard = styled.div`
   position: relative;
   border: none;
   box-shadow: 0 0 0 1px rgb(0 0 0 / 15%), 0 0 0 rgb(0 0 0 / 20%);
-`
+`;
 const UserInfo = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   padding: 12px 12px 16px;
   word-wrap: break-word;
   word-break: break-word;
-`
+`;
 
 const CardBackground = styled.div`
-  background: url('/images/card-bg.svg');
+  background: url("/images/card-bg.svg")
   background-position: center;
   background-size: 462px;
   height: 54px;
   margin: -12px -12px 0;
-`
+`;
 
 const Photo = styled.div`
   box-shadow: none;
@@ -95,14 +99,14 @@ const Photo = styled.div`
   width: 72px;
   height: 72px;
   margin: -38px auto 12px;
-`
+`;
 
 const Link = styled.div`
   font-size: 16px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.9);
   font-weight: 600;
-`
+`;
 
 const AddPhotoText = styled.div`
   color: #0a66c2;
@@ -110,7 +114,7 @@ const AddPhotoText = styled.div`
   font-size: 12px;
   line-height: 1.33;
   font-weight: 400;
-`
+`;
 const Widget = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   padding: 12px 0 12px;
@@ -142,7 +146,7 @@ const Widget = styled.div`
   svg {
     color: rgba(0, 0, 0, 1);
   }
-`
+`;
 
 const Item = styled.a`
   border-color: rgba(0, 0, 0, 0.8);
@@ -161,7 +165,7 @@ const Item = styled.a`
   &:hover {
     background-color: rgba(0, 0, 0, 0.08);
   }
-`
+`;
 const CommunityCard = styled(ArtCard)`
   padding: 8px 0 0;
   text-align: left;
@@ -189,6 +193,12 @@ const CommunityCard = styled(ArtCard)`
       }
     }
   }
-`
+`;
 
-export default LeftSide
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState.user,
+  };
+};
+
+export default connect(mapStateToProps)(LeftSide);
