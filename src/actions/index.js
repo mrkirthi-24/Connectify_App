@@ -1,5 +1,5 @@
 import { auth, provider } from "../firebase";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, signOut } from "firebase/auth";
 import { SET_USER } from "./actionType";
 
 export const setUser = (payload) => ({
@@ -24,5 +24,15 @@ export function signInAPI() {
         dispatch(setUser(payload));
       })
       .catch((error) => alert(error.message));
+  };
+}
+
+export function signOutAPI() {
+  return (dispatch) => {
+    signOut(auth)
+      .then(() => {
+        dispatch(setUser(null));
+      })
+      .catch((error) => console.log(error.message));
   };
 }
