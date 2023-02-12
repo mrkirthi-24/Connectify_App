@@ -27,7 +27,6 @@ const Main = (props) => {
   return (
     <Container>
       <ShareBox>
-        Share
         <div>
           <img src="/images/user.svg" alt="" />
           <button onClick={handleClick}>Start a post</button>
@@ -141,6 +140,16 @@ const ShareBox = styled(CommonCard)`
   color: #958b7b;
   margin: 0 0 8px;
   background: white;
+  &:first-child {
+    button {
+      letter-spacing: 0.5px;
+      &:hover {
+        background: rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: all 0.5s;
+      }
+    }
+  }
   div {
     button {
       outline: none;
