@@ -1,5 +1,6 @@
-import { auth, provider } from "../firebase";
+import { auth, provider, storage } from "../firebase";
 import { signInWithPopup, signOut } from "firebase/auth";
+import db from "../firebase";
 import { SET_USER } from "./actionType";
 
 export const setUser = (payload) => ({
@@ -34,5 +35,42 @@ export function signOutAPI() {
         dispatch(setUser(null));
       })
       .catch((error) => console.log(error.message));
+  };
+}
+
+export function postArticleAPI(payload) {
+  return (dispatch) => {
+    if (payload.image !== "") {
+      const upload = storage
+        .ref(`images/${payload.image.name}`)
+        .put(payload.image);
+      upload.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(`Progress: ${progress}%`);
+          if (snapshot === "RUNNING") {
+            console.log(`Progress: ${progress}%`);
+          }
+        },
+        (error) => console.log(error.code),
+        async () => {
+          const downloadURL = await upload.snapshot.ref.getDownloadURL();
+          db.collections("articles").add({
+            actor: {
+              description: payload.user.email,
+              title: payload.user.displayName,
+              date: payload.timestamp,
+              image: payload.user.photoURL,
+            },
+            video: payload.video,
+            sharedImage: downloadURL,
+            comments: 0,
+            description: payload.description,
+          });
+        }
+      );
+    }
   };
 }
