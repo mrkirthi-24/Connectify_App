@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ReactPlayer from "react-player";
 import { connect } from "react-redux";
 import { postArticleAPI } from "../actions";
-import { getFirestore } from "firebase/firestore";
+import { Timestamp } from "firebase/firestore";
 
 const PostModal = (props) => {
   const [editText, setEditText] = useState("");
@@ -19,6 +19,7 @@ const PostModal = (props) => {
     }
     setShareImage(image);
   };
+
   const switchAssetArea = (area) => {
     setShareImage("");
     setVideoLink("");
@@ -35,7 +36,7 @@ const PostModal = (props) => {
       video: videoLink,
       user: props.user,
       description: editText,
-      // timestamp: new getFirestore.Timestamp(),
+      timestamp: Timestamp().now(),
     };
     props.postArticleAPI(payload);
     reset(e);
