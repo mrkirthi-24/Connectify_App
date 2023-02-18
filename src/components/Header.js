@@ -66,7 +66,7 @@ const Header = (props) => {
               {/* eslint-disable-next-line */}
               <a href="#">
                 {props.user && props.user.photoURL ? (
-                  <img src={props.user.photoURL} />
+                  <img src={props.user.photoURL} alt="" />
                 ) : (
                   <img src="/images/user.svg" alt="" />
                 )}
