@@ -172,6 +172,7 @@ const NavListWrap = styled.ul`
   display: flex;
   flex-wrap: nowrap;
   list-style-type: none;
+  justify-content: space-between;
   .active {
     span:after {
       content: "";
@@ -257,6 +258,9 @@ const User = styled(NavList)`
 `;
 const Work = styled(User)`
   border-left: 1px solid rgba(0, 0, 0, 0.08);
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const mapStateToProps = (state) => {
