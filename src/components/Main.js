@@ -109,15 +109,15 @@ const Main = (props) => {
                         <button>
                           <img
                             src="https://static.licdn.com/sc/h/8ekq8gho1ruaf8i7f86vd1ftt"
-                            alt=""
+                            alt="likes"
                           />
                           <img
                             src="https://static.licdn.com/sc/h/lhxmwiwoag9qepsh4nc28zus"
-                            alt=""
+                            alt="smiles"
                           />
                           <img
                             src="https://static.licdn.com/sc/h/b1dl5jk88euc7e9ri50xy5qo8"
-                            alt=""
+                            alt="love"
                           />
                           <span>&nbsp;80</span>
                         </button>
