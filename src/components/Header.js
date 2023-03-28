@@ -24,7 +24,7 @@ const Header = (props) => {
           <NavListWrap>
             <NavList className="active">
               {/* eslint-disable-next-line */}
-              <a href="#">
+              <a>
                 <img src="/images/nav-home.svg" alt="" />
                 <span>Home</span>
               </a>
@@ -32,7 +32,7 @@ const Header = (props) => {
 
             <NavList>
               {/* eslint-disable-next-line */}
-              <a href="#">
+              <a>
                 <img src="/images/nav-network.svg" alt="" />
                 <span>My Network</span>
               </a>
@@ -40,7 +40,7 @@ const Header = (props) => {
 
             <NavList>
               {/* eslint-disable-next-line */}
-              <a href="#">
+              <a>
                 <img src="/images/nav-jobs.svg" alt="" />
                 <span>Jobs</span>
               </a>
@@ -48,7 +48,7 @@ const Header = (props) => {
 
             <NavList>
               {/* eslint-disable-next-line */}
-              <a href="#">
+              <a>
                 <img src="/images/nav-messaging.svg" alt="" />
                 <span>Messaging</span>
               </a>
@@ -56,7 +56,7 @@ const Header = (props) => {
 
             <NavList>
               {/* eslint-disable-next-line */}
-              <a href="#">
+              <a>
                 <img src="/images/nav-notifications.svg" alt="" />
                 <span>Notifications</span>
               </a>
@@ -64,7 +64,7 @@ const Header = (props) => {
 
             <User>
               {/* eslint-disable-next-line */}
-              <a href="#">
+              <a>
                 {props.user && props.user.photoURL ? (
                   <img src={props.user.photoURL} alt="" />
                 ) : (
@@ -84,7 +84,7 @@ const Header = (props) => {
 
             <Work>
               {/* eslint-disable-next-line */}
-              <a href="#">
+              <a>
                 <img src="/images/nav-work.svg" alt="" />
                 <span>
                   Work

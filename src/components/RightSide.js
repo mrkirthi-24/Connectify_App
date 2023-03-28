@@ -11,6 +11,7 @@ const RightSide = (props) => {
         </Title>
         <FeedList>
           <li>
+            {/* eslint-disable-next-line */}
             <a>
               <Avatar />
             </a>
@@ -20,6 +21,7 @@ const RightSide = (props) => {
             </div>
           </li>
           <li>
+            {/* eslint-disable-next-line */}
             <a>
               <Avatar />
             </a>

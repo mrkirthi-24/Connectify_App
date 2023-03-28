@@ -8,18 +8,20 @@ const LeftSide = (props) => {
       <ArtCard>
         <UserInfo>
           <CardBackground />
+          {/* eslint-disable-next-line */}
           <a>
             <Photo />
             <Link>
-              Welcome,
-              <br /> {props.user ? props.user.displayName : "there!"}
+              <br /> {props.user ? props.user.displayName : "Welcome!"}
             </Link>
           </a>
+          {/* eslint-disable-next-line */}
           <a>
             <AddPhotoText>Add a photo</AddPhotoText>
           </a>
         </UserInfo>
         <Widget>
+          {/* eslint-disable-next-line */}
           <a>
             <div>
               <span>Connections</span>
@@ -36,18 +38,22 @@ const LeftSide = (props) => {
         </Item>
       </ArtCard>
       <CommunityCard>
+        {/* eslint-disable-next-line */}
         <a>
           <span>Groups</span>
         </a>
+        {/* eslint-disable-next-line */}
         <a>
           <span>
             Events
             <img src="/images/plus-icon.svg" alt="" />
           </span>
         </a>
+        {/* eslint-disable-next-line */}
         <a>
           <span>Follow Hashtags</span>
         </a>
+        {/* eslint-disable-next-line */}
         <a>
           <span>Discover more</span>
         </a>

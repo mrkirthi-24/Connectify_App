@@ -10,6 +10,7 @@ const Main = (props) => {
 
   useEffect(() => {
     props.getArticles();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleClick = (e) => {
@@ -78,6 +79,7 @@ const Main = (props) => {
                 props.articles.map((article, key) => (
                   <Article key={key}>
                     <SharedActor>
+                      {/* eslint-disable-next-line */}
                       <a>
                         <img src={article.actor.image} alt="" />
                         <div>
@@ -94,6 +96,7 @@ const Main = (props) => {
                     </SharedActor>
                     <Description>{article.description}</Description>
                     <SharedImg>
+                      {/* eslint-disable-next-line */}
                       <a>
                         {!article.sharedImg && article.video ? (
                           <ReactPlayer width="100%" url={article.video} />
@@ -123,6 +126,7 @@ const Main = (props) => {
                         </button>
                       </li>
                       <li>
+                        {/* eslint-disable-next-line */}
                         <a>{article.comments} comments</a>
                       </li>
                     </SocialCounts>
@@ -199,6 +203,7 @@ const Main = (props) => {
               props.articles.map((article, key) => (
                 <Article key={key}>
                   <SharedActor>
+                    {/* eslint-disable-next-line */}
                     <a>
                       <img src={article.actor.image} alt="" />
                       <div>
@@ -215,6 +220,7 @@ const Main = (props) => {
                   </SharedActor>
                   <Description>{article.description}</Description>
                   <SharedImg>
+                    {/* eslint-disable-next-line */}
                     <a>
                       {!article.sharedImg && article.video ? (
                         <ReactPlayer width="100%" url={article.video} />
@@ -244,6 +250,7 @@ const Main = (props) => {
                       </button>
                     </li>
                     <li>
+                      {/* eslint-disable-next-line */}
                       <a>{article.comments} comments</a>
                     </li>
                   </SocialCounts>
