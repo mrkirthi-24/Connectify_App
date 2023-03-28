@@ -10,16 +10,48 @@ const LeftSide = (props) => {
           <CardBackground />
           {/* eslint-disable-next-line */}
           <a>
-            <Photo />
+            <Photo>
+              {props.user && props.user.photoURL ? (
+                <img src={props.user.photoURL} alt="MyProfilePhoto" />
+              ) : (
+                <img src="/images/user.svg" alt="UserPhoto" />
+              )}
+            </Photo>
             <Link>
-              <br /> {props.user ? props.user.displayName : "Welcome!"}
+              <br />
+              <a href="/">{props.user ? props.user.displayName : "Welcome!"}</a>
             </Link>
           </a>
           {/* eslint-disable-next-line */}
           <a>
-            <AddPhotoText>Add a photo</AddPhotoText>
+            <AddBio>Add a Bio</AddBio>
           </a>
         </UserInfo>
+        <ViewWidget>
+          {/* eslint-disable-next-line */}
+          <a>
+            <div>
+              <span>Who's viewed your profile</span>
+              <span>Impressions of your post</span>
+            </div>
+            <div>
+              <span className="profileViews">22</span>
+              <span className="profileViews">2298</span>
+            </div>
+          </a>
+        </ViewWidget>
+        <Widget>
+          {/* eslint-disable-next-line */}
+          <a>
+            <div>
+              <span>Access exclusive tools & insights</span>
+              <span>
+                <img src="/images/premium.svg" className="premImg" alt="" />
+                <span className="premium">Try Premium for free</span>
+              </span>
+            </div>
+          </a>
+        </Widget>
         <Widget>
           {/* eslint-disable-next-line */}
           <a>
@@ -84,7 +116,7 @@ const UserInfo = styled.div`
 `;
 
 const CardBackground = styled.div`
-  background: url("/images/card-bg.svg")
+  background: url("/images/card-bg.svg");
   background-position: center;
   background-size: 462px;
   height: 54px;
@@ -93,34 +125,76 @@ const CardBackground = styled.div`
 
 const Photo = styled.div`
   box-shadow: none;
-  background-image: url(/images/photo.svg);
-  border-radius: 50%;
   border: 2px solid white;
   box-sizing: border-box;
-  background-position: center;
-  background-size: 60%;
-  background-repeat: no-repeat;
-  background-clip: content-box;
-  background-color: #fff;
-  width: 72px;
-  height: 72px;
-  margin: -38px auto 12px;
+  &:first-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: -35px 0 0 0;
+    img {
+      width: 72px;
+      border-radius: 50%;
+    }
+  }
 `;
 
 const Link = styled.div`
   font-size: 16px;
   line-height: 1.5;
-  color: rgba(0, 0, 0, 0.9);
-  font-weight: 600;
+  font-weight: 300;
+  & > a {
+    color: black;
+    text-decoration: none;
+    :hover {
+      text-decoration: underline;
+    }
+  }
 `;
 
-const AddPhotoText = styled.div`
+const AddBio = styled.div`
   color: #0a66c2;
   margin-top: 4px;
   font-size: 12px;
   line-height: 1.33;
   font-weight: 400;
 `;
+
+const ViewWidget = styled.div`
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 12px 0 12px;
+  & > a {
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 12px;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.08);
+    }
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    span {
+      font-size: 12px;
+      font-weight: 550;
+      line-height: 1.5;
+      display: flex;
+      align-items: center;
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+  .profileViews {
+    color: blue;
+    line-height: 1.5;
+    display: inline;
+    text-align: right;
+    font-weight: 400;
+  }
+`;
+
 const Widget = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   padding: 12px 0 12px;
@@ -141,6 +215,8 @@ const Widget = styled.div`
     span {
       font-size: 12px;
       line-height: 1.333;
+      display: flex;
+      align-items: center;
       &:first-child {
         color: rgba(0, 0, 0, 0.6);
       }
@@ -151,6 +227,19 @@ const Widget = styled.div`
   }
   svg {
     color: rgba(0, 0, 0, 1);
+  }
+
+  .premImg {
+    width: 15px;
+    padding-right: 5px;
+  }
+  .premium {
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: underline;
+    :hover {
+      cursor: pointer;
+    }
   }
 `;
 
