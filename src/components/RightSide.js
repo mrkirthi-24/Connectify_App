@@ -1,9 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 const RightSide = (props) => {
+  const [articles, setArticles] = useState([]);
+
+  useEffect(() => {
+    const getArticles = async () => {
+      const res = await axios.get(
+        `https://newsapi.org/v2/everything?q=business&pageSize=5&apiKey=${process.env.REACT_APP_API_KEY}`
+      );
+      console.log(res);
+      setArticles(res.data.articles);
+    };
+    getArticles();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Container>
+      <NewsCard>
+        <NewsTitle>
+          <h2>LinkedIn News</h2>
+          <img src="/images/feed-icon1.svg" alt="feedicon" />
+        </NewsTitle>
+        <FeedList>
+          {articles.map((news) => {
+            return (
+              <div>
+                <li>{news.title}</li>
+              </div>
+            );
+          })}
+        </FeedList>
+        <Recommendation>
+          View all recommendations &nbsp;
+          <img src="/images/right-icon.svg" alt="" />
+        </Recommendation>
+      </NewsCard>
       <FollowCard>
         <Title>
           <h2>Add to your feed</h2>
@@ -48,6 +82,25 @@ const RightSide = (props) => {
 
 const Container = styled.div`
   grid-area: RightSide;
+`;
+const NewsCard = styled.div`
+  text-align: center;
+  overflow: hidden;
+  margin-bottom: 8px;
+  background-color: #fff;
+  border-radius: 5px;
+  position: relative;
+  border: none;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 15%), 0 0 0 rgb(0 0 0 / 20%);
+  padding: 12px;
+`;
+const NewsTitle = styled.div`
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  width: 100%;
+  color: rgba(0, 0, 0, 1);
 `;
 const FollowCard = styled.div`
   text-align: center;
