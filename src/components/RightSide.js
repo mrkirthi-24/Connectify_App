@@ -8,7 +8,7 @@ const RightSide = (props) => {
   useEffect(() => {
     const getArticles = async () => {
       const res = await axios.get(
-        `https://newsapi.org/v2/everything?q=business&pageSize=5&apiKey=${process.env.REACT_APP_API_KEY}`
+        `https://newsapi.org/v2/everything?q=business&pageSize=6&apiKey=${process.env.REACT_APP_API_KEY}`
       );
       console.log(res);
       setArticles(res.data.articles);
@@ -30,7 +30,7 @@ const RightSide = (props) => {
               <div>
                 <a key={news.source.id} href={news.url}>
                   <li>{news.title.slice(0, 35)}...</li>
-                  <span>{news.publishedAt}</span>
+                  <span>Date: {news.publishedAt.slice(0, 10)}</span>
                 </a>
               </div>
             );
@@ -43,44 +43,48 @@ const RightSide = (props) => {
           </div>
         </ShowMore>
       </NewsCard>
-      <FollowCard>
-        <Title>
-          <h2>Add to your feed</h2>
-          <img src="/images/feed-icon.svg" alt="feedicon" />
-        </Title>
-        <FeedList>
-          <li>
-            {/* eslint-disable-next-line */}
-            <a>
-              <Avatar />
-            </a>
+      <StickyCards>
+        <FollowCard>
+          <Title>
+            <h2>Add to your feed</h2>
+            <img src="/images/feed-icon.svg" alt="feedicon" />
+          </Title>
+          <FeedList>
+            <li>
+              {/* eslint-disable-next-line */}
+              <a>
+                <Avatar />
+              </a>
+              <div>
+                <span>#Linkedin</span>
+                <button>Follow</button>
+              </div>
+            </li>
+            <li>
+              {/* eslint-disable-next-line */}
+              <a>
+                <Avatar />
+              </a>
+              <div>
+                <span>#Video</span>
+                <button>Follow</button>
+              </div>
+            </li>
+          </FeedList>
+          <ShowMore>
             <div>
-              <span>#Linkedin</span>
-              <button>Follow</button>
+              <span>View all recommendations &nbsp;</span>
+              <img src="/images/right-icon.svg" alt="" />
             </div>
-          </li>
-          <li>
-            {/* eslint-disable-next-line */}
-            <a>
-              <Avatar />
-            </a>
-            <div>
-              <span>#Video</span>
-              <button>Follow</button>
-            </div>
-          </li>
-        </FeedList>
-        <Recommendation>
-          View all recommendations &nbsp;
-          <img src="/images/right-icon.svg" alt="" />
-        </Recommendation>
-      </FollowCard>
-      <BannerCard>
-        <img
-          src="https://static-exp1.licdn.com/scds/common/u/images/promo/ads/li_evergreen_jobs_ad_300x250_v1.jpg"
-          alt=""
-        />
-      </BannerCard>
+          </ShowMore>
+        </FollowCard>
+        <BannerCard>
+          <img
+            src="https://static-exp1.licdn.com/scds/common/u/images/promo/ads/li_evergreen_jobs_ad_300x250_v1.jpg"
+            alt=""
+          />
+        </BannerCard>
+      </StickyCards>
     </Container>
   );
 };
@@ -134,27 +138,22 @@ const NewsFeedList = styled.div`
       color: rgba(0, 0, 0, 1);
       font-size: 13px;
       font-weight: 600;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
       li {
-        display: flex;
         margin: 12px 0;
         position: relative;
       }
-      button {
-        background-color: transparent;
-        color: rgba(0, 0, 0, 0.6);
-        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.6);
-        padding: 16px;
-        align-items: center;
-        border-radius: 15px;
-        box-sizing: border-box;
-        font-weight: 600;
-        display: inline-flex;
-        justify-content: center;
-        max-height: 32px;
-        max-width: 480px;
-        text-align: center;
-        outline: none;
+      span {
+        font-size: 12px;
+        font-weight: 400;
+        margin-top: -10px;
+        margin-left: 18px;
       }
+    }
+    :hover {
+      background-color: rgba(0, 0, 0, 0.1);
     }
   }
 `;
@@ -218,18 +217,15 @@ const ShowMore = styled.div`
   }
 `;
 
-const Recommendation = styled.div`
-  color: #0a66c2;
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-`;
-
 const BannerCard = styled(FollowCard)`
   img {
     width: 100%;
     height: 100%;
   }
+`;
+const StickyCards = styled.div`
+  position: sticky;
+  top: 80px;
 `;
 
 export default RightSide;

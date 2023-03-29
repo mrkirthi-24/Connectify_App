@@ -288,6 +288,8 @@ const CommunityCard = styled(ArtCard)`
       }
     }
   }
+  position: sticky;
+  top: 80px;
 `;
 
 const mapStateToProps = (state) => {
