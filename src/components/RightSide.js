@@ -24,19 +24,24 @@ const RightSide = (props) => {
           <h2>LinkedIn News</h2>
           <img src="/images/feed-icon1.svg" alt="feedicon" />
         </NewsTitle>
-        <FeedList>
+        <NewsFeedList>
           {articles.map((news) => {
             return (
               <div>
-                <li>{news.title}</li>
+                <a key={news.source.id} href={news.url}>
+                  <li>{news.title.slice(0, 35)}...</li>
+                  <span>{news.publishedAt}</span>
+                </a>
               </div>
             );
           })}
-        </FeedList>
-        <Recommendation>
-          View all recommendations &nbsp;
-          <img src="/images/right-icon.svg" alt="" />
-        </Recommendation>
+        </NewsFeedList>
+        <ShowMore>
+          <div>
+            <span>Show more &nbsp;</span>
+            <img src="/images/news-down-icon.svg" alt="" />
+          </div>
+        </ShowMore>
       </NewsCard>
       <FollowCard>
         <Title>
@@ -121,6 +126,39 @@ const Title = styled.div`
   width: 100%;
   color: rgba(0, 0, 0, 0.6);
 `;
+const NewsFeedList = styled.div`
+  margin-top: 16px;
+  div {
+    & > a {
+      text-decoration: none;
+      color: rgba(0, 0, 0, 1);
+      font-size: 13px;
+      font-weight: 600;
+      li {
+        display: flex;
+        margin: 12px 0;
+        position: relative;
+      }
+      button {
+        background-color: transparent;
+        color: rgba(0, 0, 0, 0.6);
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.6);
+        padding: 16px;
+        align-items: center;
+        border-radius: 15px;
+        box-sizing: border-box;
+        font-weight: 600;
+        display: inline-flex;
+        justify-content: center;
+        max-height: 32px;
+        max-width: 480px;
+        text-align: center;
+        outline: none;
+      }
+    }
+  }
+`;
+
 const FeedList = styled.div`
   margin-top: 16px;
   li {
@@ -160,6 +198,24 @@ const Avatar = styled.div`
   width: 48px;
   height: 48px;
   margin-right: 8px;
+`;
+
+const ShowMore = styled.div`
+  color: #0a66c2;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  padding: 10px 10px 0px;
+  div {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    :hover {
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+  }
 `;
 
 const Recommendation = styled.div`
