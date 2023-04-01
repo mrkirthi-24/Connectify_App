@@ -19,7 +19,7 @@ const LeftSide = (props) => {
             </Photo>
             <Link>
               <br />
-              <a href="/">{props.user ? props.user.displayName : "Welcome!"}</a>
+              {props.user ? props.user.displayName : "Welcome!"}
             </Link>
           </a>
           {/* eslint-disable-next-line */}

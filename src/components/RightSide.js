@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import NewCard from "./NewCard";
 
 const RightSide = (props) => {
   const [articles, setArticles] = useState([]);
@@ -10,7 +11,6 @@ const RightSide = (props) => {
       const res = await axios.get(
         `https://newsapi.org/v2/everything?q=business&pageSize=6&apiKey=${process.env.REACT_APP_API_KEY}`
       );
-      console.log(res);
       setArticles(res.data.articles);
     };
     getArticles();
@@ -19,30 +19,7 @@ const RightSide = (props) => {
 
   return (
     <Container>
-      <NewsCard>
-        <NewsTitle>
-          <h2>LinkedIn News</h2>
-          <img src="/images/feed-icon1.svg" alt="feedicon" />
-        </NewsTitle>
-        <NewsFeedList>
-          {articles.map((news) => {
-            return (
-              <div>
-                <a key={news.source.id} href={news.url}>
-                  <li>{news.title.slice(0, 35)}...</li>
-                  <span>Date: {news.publishedAt.slice(0, 10)}</span>
-                </a>
-              </div>
-            );
-          })}
-        </NewsFeedList>
-        <ShowMore>
-          <div>
-            <span>Show more &nbsp;</span>
-            <img src="/images/news-down-icon.svg" alt="" />
-          </div>
-        </ShowMore>
-      </NewsCard>
+      <NewCard articles={articles} />
       <StickyCards>
         <FollowCard>
           <Title>
@@ -92,25 +69,6 @@ const RightSide = (props) => {
 const Container = styled.div`
   grid-area: RightSide;
 `;
-const NewsCard = styled.div`
-  text-align: center;
-  overflow: hidden;
-  margin-bottom: 8px;
-  background-color: #fff;
-  border-radius: 5px;
-  position: relative;
-  border: none;
-  box-shadow: 0 0 0 1px rgb(0 0 0 / 15%), 0 0 0 rgb(0 0 0 / 20%);
-  padding: 12px;
-`;
-const NewsTitle = styled.div`
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 16px;
-  width: 100%;
-  color: rgba(0, 0, 0, 1);
-`;
 const FollowCard = styled.div`
   text-align: center;
   overflow: hidden;
@@ -129,33 +87,6 @@ const Title = styled.div`
   font-size: 16px;
   width: 100%;
   color: rgba(0, 0, 0, 0.6);
-`;
-const NewsFeedList = styled.div`
-  margin-top: 16px;
-  div {
-    & > a {
-      text-decoration: none;
-      color: rgba(0, 0, 0, 1);
-      font-size: 13px;
-      font-weight: 600;
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-      li {
-        margin: 12px 0;
-        position: relative;
-      }
-      span {
-        font-size: 12px;
-        font-weight: 400;
-        margin-top: -10px;
-        margin-left: 18px;
-      }
-    }
-    :hover {
-      background-color: rgba(0, 0, 0, 0.1);
-    }
-  }
 `;
 
 const FeedList = styled.div`
@@ -199,6 +130,16 @@ const Avatar = styled.div`
   margin-right: 8px;
 `;
 
+const BannerCard = styled(FollowCard)`
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+const StickyCards = styled.div`
+  position: sticky;
+  top: 80px;
+`;
 const ShowMore = styled.div`
   color: #0a66c2;
   display: flex;
@@ -215,17 +156,6 @@ const ShowMore = styled.div`
       border-radius: 5px;
     }
   }
-`;
-
-const BannerCard = styled(FollowCard)`
-  img {
-    width: 100%;
-    height: 100%;
-  }
-`;
-const StickyCards = styled.div`
-  position: sticky;
-  top: 80px;
 `;
 
 export default RightSide;
