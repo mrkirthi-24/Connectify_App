@@ -1,2 +1,3 @@
-# LinkedIn-Clone
-Linkedin Clone using React, Firebase, Redux and Styled Components
+# Connectify
+Connectify is a professional networking platform similar to LinkedIn
+built using React.js, Redux, Firebase, and styled-components.
