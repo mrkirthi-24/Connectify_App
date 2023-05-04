@@ -9,7 +9,7 @@ const RightSide = (props) => {
   useEffect(() => {
     const getArticles = async () => {
       const res = await axios.get(
-        `https://newsapi.org/v2/everything?q=business&pageSize=6&apiKey=${process.env.REACT_APP_API_KEY}`
+        `https://newsapi.org/v2/top-headlines?country=in&pageSize=5&apiKey=${process.env.REACT_APP_API_KEY}`
       );
       setArticles(res.data.articles);
     };
