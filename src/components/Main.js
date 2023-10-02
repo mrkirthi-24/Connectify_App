@@ -32,257 +32,133 @@ const Main = (props) => {
     }
   };
 
+  //const userArticles = props.articles.length > 0 && props.articles;
   return (
-    <>
-      {props.articles.length === 0 ? (
-        <>
-          <Container>
-            <ShareBox>
-              <div>
-                {props.user && props.user.photoURL ? (
-                  <img src={props.user.photoURL} alt="" />
+    <Container>
+      <ShareBox>
+        <div>
+          {props.user && props.user.photoURL ? (
+            <img src={props.user.photoURL} alt="" />
+          ) : (
+            <img src="/images/user.svg" alt="" />
+          )}
+          <button onClick={handleClick} disabled={props.loading ? true : false}>
+            Start a post
+          </button>
+        </div>
+        <div>
+          <button>
+            <img src="/images/photo-icon.svg" alt="" />
+            <span>Photo</span>
+          </button>
+
+          <button>
+            <img src="/images/video-icon.svg" alt="" />
+            <span>Video</span>
+          </button>
+
+          <button>
+            <img src="/images/event-icon.svg" alt="" />
+            <span>Event</span>
+          </button>
+
+          <button>
+            <img src="/images/article-icon.svg" alt="" />
+            <span>Write article</span>
+          </button>
+        </div>
+      </ShareBox>
+      <Content>
+        {props.loading && <img src="./images/spin-loader.svg" alt="" />}
+        {props.articles.length === 0 ? (
+          <p>There are no articles to show</p>
+        ) : (
+          props.articles.map((article, key) => (
+            <Article key={key}>
+              <SharedActor>
+                {/* eslint-disable-next-line */}
+                <a>
+                  <img src={article.actor.image} alt="" />
+                  <div>
+                    <span>{article.actor.title}</span>
+                    <span>{article.actor.description}</span>
+                    <span>
+                      {article.actor.date.toDate().toLocaleDateString()}
+                    </span>
+                  </div>
+                </a>
+                <button>
+                  <img src="/images/ellipsis.svg" alt="" />
+                </button>
+              </SharedActor>
+              <Description>{article.description}</Description>
+              <SharedImg>
+                {!article.sharedImg && article.video ? (
+                  <ReactPlayer
+                    width="100%"
+                    url={article.video}
+                    config={{
+                      youtube: {
+                        playerVars: {
+                          showinfo: 1,
+                          origin: "http://localhost:3000",
+                        },
+                      },
+                    }}
+                  />
                 ) : (
-                  <img src="/images/user.svg" alt="" />
+                  article.sharedImage && (
+                    <img src={article.sharedImage} alt="" />
+                  )
                 )}
-                <button
-                  onClick={handleClick}
-                  disabled={props.loading ? true : false}
-                >
-                  Start a post
-                </button>
-              </div>
-              <div>
+              </SharedImg>
+              <SocialCounts>
+                <li>
+                  <button>
+                    <img
+                      src="https://static.licdn.com/sc/h/8ekq8gho1ruaf8i7f86vd1ftt"
+                      alt=""
+                    />
+                    <img
+                      src="https://static.licdn.com/sc/h/lhxmwiwoag9qepsh4nc28zus"
+                      alt=""
+                    />
+                    <img
+                      src="https://static.licdn.com/sc/h/b1dl5jk88euc7e9ri50xy5qo8"
+                      alt=""
+                    />
+                    <span>&nbsp;80</span>
+                  </button>
+                </li>
+                <li>
+                  {/* eslint-disable-next-line */}
+                  <a>{article.comments} comments</a>
+                </li>
+              </SocialCounts>
+              <SocialActions>
                 <button>
-                  <img src="/images/photo-icon.svg" alt="" />
-                  <span>Photo</span>
+                  <img src="/images/like-icon.png" alt="" className="flip" />
+                  <span>Like</span>
                 </button>
-
                 <button>
-                  <img src="/images/video-icon.svg" alt="" />
-                  <span>Video</span>
+                  <img src="/images/comment-icon.svg" alt="" />
+                  <span>Comment</span>
                 </button>
-
                 <button>
-                  <img src="/images/event-icon.svg" alt="" />
-                  <span>Event</span>
+                  <img src="/images/repost-icon.png" alt="" />
+                  <span>Repost</span>
                 </button>
-
                 <button>
-                  <img src="/images/article-icon.svg" alt="" />
-                  <span>Write article</span>
+                  <img src="/images/send-icon.svg" alt="" />
+                  <span>Send</span>
                 </button>
-              </div>
-            </ShareBox>
-            <Content>
-              {props.loading && <img src="./images/spin-loader.svg" alt="" />}
-              {props.articles.length > 0 &&
-                props.articles.map((article, key) => (
-                  <Article key={key}>
-                    <SharedActor>
-                      {/* eslint-disable-next-line */}
-                      <a>
-                        <img src={article.actor.image} alt="" />
-                        <div>
-                          <span>{article.actor.title}</span>
-                          <span>{article.actor.description}</span>
-                          <span>
-                            {article.actor.date.toDate().toLocaleDateString()}
-                          </span>
-                        </div>
-                      </a>
-                      <button>
-                        <img src="/images/ellipsis.svg" alt="" />
-                      </button>
-                    </SharedActor>
-                    <Description>{article.description}</Description>
-                    <SharedImg>
-                      {/* eslint-disable-next-line */}
-                      <a>
-                        {!article.sharedImg && article.video ? (
-                          <ReactPlayer width="100%" url={article.video} />
-                        ) : (
-                          article.sharedImage && (
-                            <img src={article.sharedImage} alt="" />
-                          )
-                        )}
-                      </a>
-                    </SharedImg>
-                    <SocialCounts>
-                      <li>
-                        <button>
-                          <img
-                            src="https://static.licdn.com/sc/h/8ekq8gho1ruaf8i7f86vd1ftt"
-                            alt="likes"
-                          />
-                          <img
-                            src="https://static.licdn.com/sc/h/lhxmwiwoag9qepsh4nc28zus"
-                            alt="smiles"
-                          />
-                          <img
-                            src="https://static.licdn.com/sc/h/b1dl5jk88euc7e9ri50xy5qo8"
-                            alt="love"
-                          />
-                          <span>&nbsp;80</span>
-                        </button>
-                      </li>
-                      <li>
-                        {/* eslint-disable-next-line */}
-                        <a>{article.comments} comments</a>
-                      </li>
-                    </SocialCounts>
-                    <SocialActions>
-                      <button>
-                        <img
-                          src="/images/like-icon.png"
-                          alt=""
-                          className="flip"
-                        />
-                        <span>Like</span>
-                      </button>
-                      <button>
-                        <img src="/images/comment-icon.svg" alt="" />
-                        <span>Comment</span>
-                      </button>
-                      <button>
-                        <img src="/images/repost-icon.png" alt="" />
-                        <span>Repost</span>
-                      </button>
-                      <button>
-                        <img src="/images/send-icon.svg" alt="" />
-                        <span>Send</span>
-                      </button>
-                    </SocialActions>
-                  </Article>
-                ))}
-            </Content>
-            <PostModal showModal={showModal} handleClick={handleClick} />
-            <p>There are no articles to show</p>
-          </Container>
-        </>
-      ) : (
-        <Container>
-          <ShareBox>
-            <div>
-              {props.user && props.user.photoURL ? (
-                <img src={props.user.photoURL} alt="" />
-              ) : (
-                <img src="/images/user.svg" alt="" />
-              )}
-              <button
-                onClick={handleClick}
-                disabled={props.loading ? true : false}
-              >
-                Start a post
-              </button>
-            </div>
-            <div>
-              <button>
-                <img src="/images/photo-icon.svg" alt="" />
-                <span>Photo</span>
-              </button>
-
-              <button>
-                <img src="/images/video-icon.svg" alt="" />
-                <span>Video</span>
-              </button>
-
-              <button>
-                <img src="/images/event-icon.svg" alt="" />
-                <span>Event</span>
-              </button>
-
-              <button>
-                <img src="/images/article-icon.svg" alt="" />
-                <span>Write article</span>
-              </button>
-            </div>
-          </ShareBox>
-          <Content>
-            {props.loading && <img src="./images/spin-loader.svg" alt="" />}
-            {props.articles.length > 0 &&
-              props.articles.map((article, key) => (
-                <Article key={key}>
-                  <SharedActor>
-                    {/* eslint-disable-next-line */}
-                    <a>
-                      <img src={article.actor.image} alt="" />
-                      <div>
-                        <span>{article.actor.title}</span>
-                        <span>{article.actor.description}</span>
-                        <span>
-                          {article.actor.date.toDate().toLocaleDateString()}
-                        </span>
-                      </div>
-                    </a>
-                    <button>
-                      <img src="/images/ellipsis.svg" alt="" />
-                    </button>
-                  </SharedActor>
-                  <Description>{article.description}</Description>
-                  <SharedImg>
-                    {/* eslint-disable-next-line */}
-                    <a>
-                      {!article.sharedImg && article.video ? (
-                        <ReactPlayer width="100%" url={article.video} />
-                      ) : (
-                        article.sharedImage && (
-                          <img src={article.sharedImage} alt="" />
-                        )
-                      )}
-                    </a>
-                  </SharedImg>
-                  <SocialCounts>
-                    <li>
-                      <button>
-                        <img
-                          src="https://static.licdn.com/sc/h/8ekq8gho1ruaf8i7f86vd1ftt"
-                          alt=""
-                        />
-                        <img
-                          src="https://static.licdn.com/sc/h/lhxmwiwoag9qepsh4nc28zus"
-                          alt=""
-                        />
-                        <img
-                          src="https://static.licdn.com/sc/h/b1dl5jk88euc7e9ri50xy5qo8"
-                          alt=""
-                        />
-                        <span>&nbsp;80</span>
-                      </button>
-                    </li>
-                    <li>
-                      {/* eslint-disable-next-line */}
-                      <a>{article.comments} comments</a>
-                    </li>
-                  </SocialCounts>
-                  <SocialActions>
-                    <button>
-                      <img
-                        src="/images/like-icon.png"
-                        alt=""
-                        className="flip"
-                      />
-                      <span>Like</span>
-                    </button>
-                    <button>
-                      <img src="/images/comment-icon.svg" alt="" />
-                      <span>Comment</span>
-                    </button>
-                    <button>
-                      <img src="/images/repost-icon.png" alt="" />
-                      <span>Repost</span>
-                    </button>
-                    <button>
-                      <img src="/images/send-icon.svg" alt="" />
-                      <span>Send</span>
-                    </button>
-                  </SocialActions>
-                </Article>
-              ))}
-          </Content>
-          <PostModal showModal={showModal} handleClick={handleClick} />
-        </Container>
-      )}
-    </>
+              </SocialActions>
+            </Article>
+          ))
+        )}
+      </Content>
+      <PostModal showModal={showModal} handleClick={handleClick} />
+    </Container>
   );
 };
 
@@ -303,7 +179,9 @@ const CommonCard = styled.div`
   border-radius: 5px;
   border: none;
   position: relative;
-  box-shadow: 0 0 0 1px rgb(0 0 0 / 15%), 0 0 0 rgb(0 0 0 / 20%);
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 15%),
+    0 0 0 rgb(0 0 0 / 20%);
 `;
 const ShareBox = styled(CommonCard)`
   display: flex;

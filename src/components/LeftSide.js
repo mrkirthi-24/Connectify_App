@@ -106,7 +106,9 @@ const ArtCard = styled.div`
   transition: box-shadow 83ms;
   position: relative;
   border: none;
-  box-shadow: 0 0 0 1px rgb(0 0 0 / 15%), 0 0 0 rgb(0 0 0 / 20%);
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 15%),
+    0 0 0 rgb(0 0 0 / 20%);
 `;
 const UserInfo = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
@@ -266,6 +268,8 @@ const CommunityCard = styled(ArtCard)`
   text-align: left;
   display: flex;
   flex-direction: column;
+  position: sticky;
+  top: 80px;
   a {
     color: black;
     padding: 4px 12px 4px 12px;
@@ -288,8 +292,6 @@ const CommunityCard = styled(ArtCard)`
       }
     }
   }
-  position: sticky;
-  top: 80px;
 `;
 
 const mapStateToProps = (state) => {

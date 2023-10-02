@@ -66,7 +66,7 @@ const Header = (props) => {
               {/* eslint-disable-next-line */}
               <a>
                 {props.user && props.user.photoURL ? (
-                  <img src={props.user.photoURL} alt="" />
+                  <img src={props.user?.photoURL} alt="" />
                 ) : (
                   <img src="/images/user.svg" alt="" />
                 )}
@@ -117,10 +117,12 @@ const Content = styled.div`
   min-height: 100%;
   max-width: 1128px;
 `;
+
 const Logo = styled.span`
   margin-right: 8px;
   font-size: 0px;
 `;
+
 const Search = styled.div`
   opacity: 1;
   flex-grow: 1;
@@ -144,6 +146,7 @@ const Search = styled.div`
     }
   }
 `;
+
 const SearchIcon = styled.div`
   width: 40px;
   position: absolute;
@@ -157,6 +160,7 @@ const SearchIcon = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 const Nav = styled.nav`
   margin-left: auto;
   display: block;
@@ -168,6 +172,7 @@ const Nav = styled.nav`
     width: 100%;
   }
 `;
+
 const NavListWrap = styled.ul`
   display: flex;
   flex-wrap: nowrap;
@@ -187,6 +192,7 @@ const NavListWrap = styled.ul`
     }
   }
 `;
+
 const NavList = styled.li`
   display: flex;
   align-items: center;
@@ -222,6 +228,7 @@ const NavList = styled.li`
     }
   }
 `;
+
 const SignOut = styled.div`
   position: absolute;
   top: 45px;
@@ -234,6 +241,7 @@ const SignOut = styled.div`
   text-align: center;
   display: none;
 `;
+
 const User = styled(NavList)`
   a > svg {
     width: 24px;
@@ -250,12 +258,13 @@ const User = styled(NavList)`
   }
   &:hover {
     ${SignOut} {
-      align-items: center;
       display: flex;
+      align-items: center;
       justify-content: center;
     }
   }
 `;
+
 const Work = styled(User)`
   border-left: 1px solid rgba(0, 0, 0, 0.08);
   @media (max-width: 768px) {

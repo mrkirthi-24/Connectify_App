@@ -105,7 +105,18 @@ const PostModal = (props) => {
                         onChange={(e) => setVideoLink(e.target.value)}
                       />
                       {videoLink && (
-                        <ReactPlayer width={"100%"} url={videoLink} />
+                        <ReactPlayer
+                          width={"100%"}
+                          url={videoLink}
+                          config={{
+                            youtube: {
+                              playerVars: {
+                                showinfo: 1,
+                                origin: "http://localhost:3000",
+                              },
+                            },
+                          }}
+                        />
                       )}
                     </>
                   )

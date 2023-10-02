@@ -5,15 +5,29 @@ import NewCard from "./NewCard";
 
 const RightSide = (props) => {
   const [articles, setArticles] = useState([]);
+  const source = axios.CancelToken.source(); // Create a cancel token source
 
   useEffect(() => {
     const getArticles = async () => {
-      const res = await axios.get(
-        `https://newsapi.org/v2/top-headlines?country=in&pageSize=5&apiKey=${process.env.REACT_APP_API_KEY}`
-      );
-      setArticles(res.data.articles);
+      try {
+        const res = await axios.get(
+          `https://newsapi.org/v2/top-headlines?country=in&pageSize=5&apiKey=${process.env.REACT_APP_API_KEY}`,
+          { cancelToken: source.token }
+        );
+        setArticles(res.data.articles);
+      } catch (error) {
+        if (axios.isCancel(error)) {
+        }
+      }
     };
+
     getArticles();
+
+    // Cleanup function to cancel the request when the component unmounts
+    return () => {
+      source.cancel("Component unmounted");
+    };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -57,7 +71,7 @@ const RightSide = (props) => {
         </FollowCard>
         <BannerCard>
           <img
-            src="https://static-exp1.licdn.com/scds/common/u/images/promo/ads/li_evergreen_jobs_ad_300x250_v1.jpg"
+            src="https://blaze.today/images/posts/linkedin-marketing.jpeg"
             alt=""
           />
         </BannerCard>
@@ -77,7 +91,9 @@ const FollowCard = styled.div`
   border-radius: 5px;
   position: relative;
   border: none;
-  box-shadow: 0 0 0 1px rgb(0 0 0 / 15%), 0 0 0 rgb(0 0 0 / 20%);
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 15%),
+    0 0 0 rgb(0 0 0 / 20%);
   padding: 12px;
 `;
 const Title = styled.div`
